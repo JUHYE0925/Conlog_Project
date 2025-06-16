@@ -42,6 +42,10 @@ public class ReviewController {
 
         List<ReviewDTO> reviewList = reviewService.selectAllMyReview(myMemberNo);
 
+        for(ReviewDTO review : reviewList){
+            System.out.println("review = " + review);
+        }
+
         /* 응답 데이터 설정 */
         Map<String, Object> responseMap = new HashMap<>();
         responseMap.put("reviewList",  reviewList);
@@ -53,4 +57,22 @@ public class ReviewController {
         return new ResponseEntity(responseMessage, headers, HttpStatus.OK);
     }
 
+    /* Review 상세 조회 */
+    @GetMapping("/selectOne/{reviewNo}")
+    public ResponseEntity<ResponseMessage> selectOneReviewByReviewNo(@PathVariable int reviewNo){
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+        int memberNo = 1;
+
+        ReviewDTO oneReview = reviewService.selectOneReviewByReviewNo(reviewNo);
+
+        Map<String, Object> responseMap = new HashMap<>();
+        responseMap.put("oneReview", oneReview);
+
+        ResponseMessage responseMessage = new ResponseMessage(200, "상세 조회 성공", responseMap);
+
+        return new ResponseEntity<>(responseMessage, headers, HttpStatus.OK);
+    }
 }

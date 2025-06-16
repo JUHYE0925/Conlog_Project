@@ -1,1 +1,5 @@
+### 리뷰 전체 조회
 GET http://localhost:8001/review/selectAll
+
+### 리뷰 상세 조회
+GET http://localhost:8001/review/selectOne/3

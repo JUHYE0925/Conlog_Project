@@ -21,4 +21,12 @@
         WHERE MEMBER_NO = #{ myMemberNo }
     </select>
 
+    <!-- memberNo, reviewNo를 통해 Review 상세 조회 -->
+    <select id="selectOneReviewByReviewNo" parameterType="_int" resultMap="reviewResultMap">
+        SELECT
+               *
+          FROM REVIEW
+         WHERE REVIEW_NO = #{ reviewNo }
+    </select>
+
 </mapper>

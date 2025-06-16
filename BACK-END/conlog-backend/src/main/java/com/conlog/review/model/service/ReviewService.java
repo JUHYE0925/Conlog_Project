@@ -20,4 +20,10 @@ public class ReviewService {
 
         return reviewMapper.selectAllMyReview(myMemberNo);
     }
+
+    /* memberNo, reviewNo를 통해 Review 상세 조회 */
+    public ReviewDTO selectOneReviewByReviewNo(int reviewNo) {
+
+        return reviewMapper.selectOneReviewByReviewNo(reviewNo);
+    }
 }
