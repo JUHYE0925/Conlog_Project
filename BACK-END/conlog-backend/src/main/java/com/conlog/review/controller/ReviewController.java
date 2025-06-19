@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +59,7 @@ public class ReviewController {
     }
 
     /* Review 상세 조회 */
+    @Operation(summary = "리뷰 상세 조회", description = "리뷰번호로 리뷰 상세 조회한다.")
     @GetMapping("/selectOne/{reviewNo}")
     public ResponseEntity<ResponseMessage> selectOneReviewByReviewNo(@PathVariable int reviewNo){
 
@@ -74,5 +76,22 @@ public class ReviewController {
         ResponseMessage responseMessage = new ResponseMessage(200, "상세 조회 성공", responseMap);
 
         return new ResponseEntity<>(responseMessage, headers, HttpStatus.OK);
+    }
+
+    /* 등록된 콘텐츠에 새 리뷰 작성하기 */
+    @Operation(summary = "새 리뷰 등록", description = "새로운 리뷰를 등록한다.")
+    @PostMapping("/regist")
+    public ResponseEntity<?> registNewReview(@RequestBody ReviewDTO newReview){
+
+        // 로그인 완성 되면 회원 번호 수정 -> 프론트에서 같이 DTO에 담아서 넘겨주기 때문에 여기서 memberNo 안받아도 될 듯
+        int memberNo = 1;
+
+        System.out.println("newReview = " + newReview);
+
+        reviewService.registNewReview(newReview);
+
+        return ResponseEntity
+                .created(URI.create("/review/selectAll"))  // 어디로 반환할지 생각해보기
+                .build();
     }
 }

@@ -29,4 +29,26 @@
          WHERE REVIEW_NO = #{ reviewNo }
     </select>
 
+    <!-- 새 리뷰 등록하기 -->
+    <insert id="registNewReview" parameterType="com.conlog.review.model.dto.ReviewDTO">
+        INSERT INTO REVIEW
+        (
+            REVIEW_NO
+          , REVIEW_DATE
+          , REVIEW_SCORE
+          , REVIEW_CONTENT
+          , MEMBER_NO
+          , CONTENTS_NO
+        )
+        VALUES
+        (
+            NULL
+          , #{ reviewDate }
+          , #{ reviewScore }
+          , #{ reviewContent }
+          , #{ memberNo }
+          , #{ contentsNo }
+        )
+    </insert>
+
 </mapper>

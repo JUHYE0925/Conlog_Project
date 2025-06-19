@@ -26,4 +26,9 @@ public class ReviewService {
 
         return reviewMapper.selectOneReviewByReviewNo(reviewNo);
     }
+
+    /* 새 리뷰 등록하기 */
+    public void registNewReview(ReviewDTO newReview) {
+        reviewMapper.registNewReview(newReview);
+    }
 }
